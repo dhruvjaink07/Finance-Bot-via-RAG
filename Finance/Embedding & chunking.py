@@ -6,7 +6,7 @@ import chromadb
 import glob
 
 
-pdf_files = glob.glob("E:/CodesML/Finance docs/*.pdf")# change to ur file directory path
+pdf_files = glob.glob("#Add ur file path here")
 
 loaders = [PyPDFLoader(pdf) for pdf in pdf_files]
 
