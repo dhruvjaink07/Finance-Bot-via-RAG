@@ -1,4 +1,5 @@
 🤖 Finance Bot
+
 📋 Overview
 Finance Bot is an intelligent assistant that leverages Retrieval-Augmented Generation (RAG) to provide accurate, context-aware responses to financial questions. By combining the power of large language models with retrieval from a curated knowledge base, Finance Bot delivers specific, up-to-date financial information and advice.
 ✨ Features
