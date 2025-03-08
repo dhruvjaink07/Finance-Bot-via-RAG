@@ -3,12 +3,12 @@ import os
 from langchain_mistralai.chat_models import ChatMistralAI
 import chromadb
 
-os.environ["MISTRAL_API_KEY"] = "236mWUjffs24Rg2pkQNfQiJNxg9EUxNO"
+os.environ["MISTRAL_API_KEY"] = "Your Api Key here"
 
 client = chromadb.PersistentClient(path='db')
 collection = client.get_or_create_collection('collection')
 
-os.environ["MISTRAL_API_KEY"] = "236mWUjffs24Rg2pkQNfQiJNxg9EUxNO"
+os.environ["MISTRAL_API_KEY"] = "Your Api Key here"
 
 
 template = """
