@@ -1,9 +1,12 @@
 🤖 Finance Bot
 
 
+
 📋 Overview
 
 Finance Bot is an intelligent assistant that leverages Retrieval-Augmented Generation (RAG) to provide accurate, context-aware responses to financial questions. By combining the power of large language models with retrieval from a curated knowledge base, Finance Bot delivers specific, up-to-date financial information and advice.
+
+
 
 ✨ Features
 
@@ -17,6 +20,8 @@ Finance Bot is an intelligent assistant that leverages Retrieval-Augmented Gener
 
 📚 Citation Support: References to source material for accountability and further reading
 
+
+
 🏗️ Architecture
 
 Finance Bot is built on a RAG (Retrieval-Augmented Generation) architecture consisting of:
@@ -26,6 +31,8 @@ Finance Bot is built on a RAG (Retrieval-Augmented Generation) architecture cons
 🔍 Retriever: Fetches relevant documents based on query similarity
 
 🧩 LLM Integration: Generates coherent and accurate responses using retrieved context
+
+
 
 🚀 Getting Started
 
@@ -53,6 +60,7 @@ cp .env.example .env
 Edit .env file with your API keys and configuration parameters.
 
 
+
 📱 Usage
 
 ❓ Ask a Question: Type a financial question in natural language
@@ -68,6 +76,7 @@ Example: "What are the tax implications of that approach?"
 Example: "Tell me about mortgage refinancing options"
 
 
+
 🛠️ Customization
 
 📝 Adding Custom Knowledge
@@ -77,9 +86,11 @@ Run the indexing script to update the knowledge base:
 Copy python scripts/index_documents.py
 
 
+
 📜 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+
 
 
 🙏 Acknowledgments
