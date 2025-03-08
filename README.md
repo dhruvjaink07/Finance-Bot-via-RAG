@@ -65,7 +65,7 @@ Example: "Tell me about mortgage refinancing options"
 
 Place new financial documents in the data/documents directory
 Run the indexing script to update the knowledge base:
-Copypython scripts/index_documents.py
+Copy python scripts/index_documents.py
 
 
 📜 License
