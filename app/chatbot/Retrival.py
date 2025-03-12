@@ -8,7 +8,6 @@ os.environ["MISTRAL_API_KEY"] = "Your Api Key here"
 client = chromadb.PersistentClient(path='db')
 collection = client.get_or_create_collection('collection')
 
-os.environ["MISTRAL_API_KEY"] = "236mWUjffs24Rg2pkQNfQiJNxg9EUxNO"
 
 
 template = """
@@ -46,10 +45,10 @@ finance_keywords = [
                     
                           
 
-def generate_response(prompt: str, model_name: str = "mistral-small", temperature: float = 0.7) -> str:
+def generate_response(prompt: str, model_name: str = "mistral-small", temperature: float = 0.7) -> dict:
     try:
         if not any(keyword in prompt.lower() for keyword in finance_keywords):
-            return "Please ask finance-related questions."
+            return {"message": "Please ask finance-related questions."}
         else:
             generator = ChatMistralAI(
                 model=model_name, 
@@ -58,10 +57,9 @@ def generate_response(prompt: str, model_name: str = "mistral-small", temperatur
             )
 
             response = generator.invoke(prompt)
-            response_str = str(response)
-            markdown_response = f"```markdown\n{response_str}\n```"
-            return {"message": markdown_response}
+            response_str = response.content  # Access the content attribute directly
+            return {"message": response_str}
 
     except Exception as e:
-        return f"Error: {e}"
+        return {"message": f"Error: {e}"}
 
