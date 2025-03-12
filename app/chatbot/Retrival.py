@@ -1,25 +1,25 @@
 from flask import request, jsonify, Blueprint
 import os
 from langchain_mistralai.chat_models import ChatMistralAI
+from langchain.chains.conversation.memory import ConversationBufferMemory
+from langchain.chains import conversation
 import chromadb
 
-os.environ["MISTRAL_API_KEY"] = "Your Api Key here"
+os.environ["MISTRAL_API_KEY"] = "236mWUjffs24Rg2pkQNfQiJNxg9EUxNO"
 
 client = chromadb.PersistentClient(path='db')
 collection = client.get_or_create_collection('collection')
 
-
+llm = ChatMistralAI(model="mistral-small", temperature=0.7, mistral_api_key=os.getenv("MISTRAL_API_KEY"))
+history = []
 
 template = """
 You are an experienced financial consultant who helps clients with in their investment and financial planning.
 you have to follow the following guidelines:
 
-1. You should provide financial advice to clients based on their financial goals and risk tolerance.
-2. You should help clients develop a financial plan that meets their needs and objectives.
-3. You should explain complex financial concepts in a clear and understandable way.
-4. Short and concise answers are preferred.
-5. You should provide a clear explanation of the financial concepts and terms.
-6. You should provide examples to illustrate your points.
+1.Only answer finance-related questions.
+2.polite and professional in your responses.
+3.Keep the conversation focused on the client's needs.
 
 """
 
@@ -40,26 +40,34 @@ finance_keywords = [
     'tax','salary','details', 'income tax', 'tax rate', 'tax bracket', 'tax deduction', 'tax credit',
     'taxable income', 'tax return', 'tax planning', 'tax evasion', 'tax avoidance', 'tax haven',
     'State','Government','Public finance','stock market','stock exchange','stock price','stock index',
-    'ctc','insurance','insurance policy','insurance premium','insurance claim','insurance company',
+    'ctc','insurance','insurance policy','insurance premium','insurance claim','insurance company','types',
+    'explain','explaination','explain me','explain to me','what is','what are','how does','how do','why','tell me',
+    'elaborate','elaborate on','elaborate for me','elaborate to me','clarify','clarify for me','clarify to me',
 ]
-                    
-                          
 
-def generate_response(prompt: str, model_name: str = "mistral-small", temperature: float = 0.7) -> dict:
-    try:
-        if not any(keyword in prompt.lower() for keyword in finance_keywords):
-            return {"message": "Please ask finance-related questions."}
-        else:
-            generator = ChatMistralAI(
-                model=model_name, 
-                temperature=temperature,
-                mistral_api_key=os.getenv("MISTRAL_API_KEY")  
-            )
 
-            response = generator.invoke(prompt)
-            response_str = response.content  # Access the content attribute directly
-            return {"message": response_str}
 
-    except Exception as e:
-        return {"message": f"Error: {e}"}
+def is_finance_related(question):
+    for keyword in finance_keywords:
+        if keyword in question.lower():
+            return True
+    return False
+   
+
+def generate_response(prompt):
+   
+    if not is_finance_related(prompt):
+        return "I'm sorry, I can only answer finance-related questions." 
+    history.append({"role": "user", "content": prompt})
+    context = "\n".join([f"{turn['role']}: {turn['content']}" for turn in history])
+
+  
+    response = llm.invoke(context)
+    history.append({"role": "assistant", "content": response})
+    response_str = str(response)
+    return response_str
+
+
+
+
 
