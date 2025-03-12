@@ -42,7 +42,8 @@ finance_keywords = [
     'State','Government','Public finance','stock market','stock exchange','stock price','stock index',
     'ctc','insurance','insurance policy','insurance premium','insurance claim','insurance company','types',
     'explain','explaination','explain me','explain to me','what is','what are','how does','how do','why','tell me',
-    'elaborate','elaborate on','elaborate for me','elaborate to me','clarify','clarify for me','clarify to me',
+    'elaborate','elaborate on','elaborate for me','elaborate to me','clarify','clarify for me','clarify to me','suggest me'
+    'give me', 'more info','phising','scams',
 ]
 
 
